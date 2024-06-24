@@ -16,26 +16,35 @@
 
         <Label Grid.Row="0"
                Grid.Column="0"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
                Text="Notes"
-               BackgroundColor="Red"
+               BackgroundColor="LightGrey"
                Padding="10" />
 
         <Button Grid.Row="0"
                 Grid.Column="2"
                 Command="{Binding AddCommand}"
+                BackgroundColor="Black"
                 Text="Add" />
 
-        <ListView Grid.Row="1"
-                  Grid.Column="0"
-                  Grid.ColumnSpan="3"
-                  ItemsSource="{Binding Notes}">
-
-            <ListView.ItemTemplate >
+        <CollectionView Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Margin="10"
+                        
+                        ItemsSource="{Binding Notes}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="2" 
+                                 VerticalItemSpacing="5"
+                                 HorizontalItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            
+            <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Note">
-
-                    <ViewCell>
-                        <StackLayout>
-                            <SwipeView VerticalOptions="FillAndExpand"
+                    <StackLayout>
+                        <SwipeView VerticalOptions="FillAndExpand"
                                    HorizontalOptions="FillAndExpand">
                             <Frame CornerRadius="10"
                                    HasShadow="True"
@@ -46,9 +55,7 @@
                                 </Frame.GestureRecognizers>
 
                                 <Label Text="{Binding S}"
-                                       MaxLines="5"
-                                       />
-
+                                       MaxLines="5" />
                             </Frame>
                             <SwipeView.RightItems>
                                 <SwipeItems>
@@ -58,12 +65,10 @@
                                                BackgroundColor="Red" />
                                 </SwipeItems>
                             </SwipeView.RightItems>
-
                         </SwipeView>
-                        </StackLayout>
-                    </ViewCell>
+                    </StackLayout>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>
